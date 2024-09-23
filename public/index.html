@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Rankerer</title>
+</head>
+<body>
+
+    <div id="form">
+        <input type="text" id="namei" placeholder="Name">
+        <input type="text" id="tagi" placeholder="Tag">
+        <button id="prebut">
+            Preview
+        </button>
+    </div>
+
+    <div id="general">
+        <img 
+            src="https://cdn3.emoji.gg/emojis/9768_Radiant_Valorant.png" 
+            alt=""
+            id="displayIcon"
+        >
+        <div>
+            <h3 id="rank">
+                RANK
+            </h3>
+            <div id="sobstatusc">
+                <div id="statusc">
+                    <span id="status-bar">
+                        
+                    </span>
+                </div>
+                <span id="rr">
+                    0/100
+                </span>
+            </div>
+            <span id="name">
+                Name#Tag
+            </span>
+        </div>
+    </div>
+
+
+    <span id="url">
+        https://rankerer.com/getrank/?name=name&tag=1234
+    </span>
+    
+
+    <script>
+        function get(element) {
+            return document.getElementById(element)
+        }
+
+        function getValueOf(element) {
+            return get(element).value
+        }
+
+        get('prebut')
+            .addEventListener('click', async () => {
+                const name = getValueOf('namei')
+                const tag = getValueOf('tagi')
+
+                const response = await fetch(`https://api.henrikdev.xyz/valorant/v2/mmr/eu/${name}/${tag}?api_key=HDEV-11de0db4-959b-44b0-a1e6-c1c191922deb`, {
+                    method: 'GET',
+                    headers: {},
+                });
+
+                const data = await response.json()
+                console.log(data)
+
+                const currentstr = data.data.current_data.currenttierpatched
+                const currentelo = data.data.current_data.elo 
+                console.log(currentelo)
+                console.log(currentstr.toLowerCase())
+                const cw = currentstr.toLowerCase()
+                const indexBased = String(currentelo).slice(1)
+                const indexBased2 = String(currentelo).slice(2)
+                const currentrr = Number(indexBased)
+                const currentrr2 = Number(indexBased2)
+                get('rank').innerText = currentstr.toUpperCase()
+                get('displayIcon').src = data.data.current_data.images.large
+                get('name').innerText = `${data.data.name}#${data.data.tag}`
+                get('url').innerText = `https://rankerer.com/api/getrank?name=${data.data.name}&tag=${data.data.tag}`
+
+                if (cw.includes('iron') || cw.includes('bronze') || cw.includes('silver') || cw.includes('gold 1')) {
+                    get('status-bar').style.width = `${currentrr}%`
+                    get('rr').innerText = `${currentrr}/100`
+                } else if (cw.includes('gold 2') || cw.includes('gold 3') || cw.includes('platinum') || cw.includes('diamond') || cw.includes('ascendant') || cw.includes('inmortal')) {
+                    get('status-bar').style.width = `${currentrr2}%`
+                    get('rr').innerText = `${currentrr2}/100`
+                }
+            })
+    </script>
+</body>
+</html>

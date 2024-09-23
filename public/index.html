@@ -44,7 +44,7 @@
 
 
     <span id="url">
-        https://rankerer.com/getrank/?name=name&tag=1234
+        https://app.rankerer.es/getrank/?name=name&tag=1234
     </span>
     
 
@@ -82,7 +82,7 @@
                 get('rank').innerText = currentstr.toUpperCase()
                 get('displayIcon').src = data.data.current_data.images.large
                 get('name').innerText = `${data.data.name}#${data.data.tag}`
-                get('url').innerText = `https://rankerer.com/api/getrank?name=${data.data.name}&tag=${data.data.tag}`
+                get('url').innerText = `https://app.rankerer.es/api/getrank?name=${data.data.name}&tag=${data.data.tag}`
 
                 if (cw.includes('iron') || cw.includes('bronze') || cw.includes('silver') || cw.includes('gold 1')) {
                     get('status-bar').style.width = `${currentrr}%`

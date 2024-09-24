@@ -13,7 +13,7 @@ body {
   padding: 20px;
   border: gray solid 1px;
   background: transparent;
-  width: 550px;
+  width: 600px;
   -webkit-backdrop-filter: blur(25px);
           backdrop-filter: blur(25px);
   border-radius: 5px;

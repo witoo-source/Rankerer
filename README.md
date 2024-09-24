@@ -1,5 +1,5 @@
 # Rankerer
-An OBS Browser Source providing real-time updated valiant user's rank
+An OBS Browser Source providing real-time updated valorant user's rank
 
 ## How to use
 

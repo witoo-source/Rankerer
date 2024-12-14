@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=content_copy" />
     <title>Rankerer</title>
 </head>
 <body>
@@ -42,10 +43,19 @@
         </div>
     </div>
 
+    <br>
 
-    <span id="url">
-        https://app.rankerer.es/rank.html?name=name&tag=1234
-    </span>
+    <div style="display: flex; flex-direction: row;">
+        <span id="url">
+            https://app.rankerer.es/rank.html?name=name&tag=1234
+        </span>
+    
+        <span id="copyb">
+            <span class="material-symbols-outlined">
+                content_copy
+            </span>
+        </span>
+    </div>
     
 
     <script>
@@ -59,6 +69,10 @@
 
         get('prebut')
             .addEventListener('click', async () => {
+
+                get('copyb').style.backgroundColor = 'transparent'
+                get('copyb').style.color = 'white'
+
                 const name = getValueOf('namei')
                 const tag = getValueOf('tagi')
 
@@ -92,6 +106,29 @@
                     get('rr').innerText = `${currentrr2}/100`
                 }
             })
+
+            get('copyb')
+                .addEventListener('click', () => {
+                    navigator.clipboard.writeText(get('url').innerText)
+                    get('copyb').style.backgroundColor = 'white'
+                    get('copyb').style.color = 'black'
+                    get('url').style.backgroundColor = 'transparent'
+                    get('url').style.scale = '1'
+                    get('url').style.boxShadow = ''
+                })
+
+            get('copyb')
+                .addEventListener('mouseenter', () => {
+                    get('url').style.backgroundColor = '#505050'
+                    get('url').style.scale = '0.9'
+                    get('url').style.boxShadow = '0px 0px 50px 0px #505050'
+                })
+            get('copyb')
+                .addEventListener('mouseleave', () => {
+                    get('url').style.backgroundColor = 'transparent'
+                    get('url').style.scale = '1'
+                    get('url').style.boxShadow = ''
+                })
     </script>
 </body>
 </html>
